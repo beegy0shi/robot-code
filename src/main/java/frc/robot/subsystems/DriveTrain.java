@@ -9,20 +9,63 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.RobotMap;
+import frc.robot.Constants;
 
 public class DriveTrain extends SubsystemBase {
-  private final Spark rMotor1 = RobotMap.RIGHT_MOTOR_1;
-  private final Spark rMotor2 = RobotMap.RIGHT_MOTOR_2;
-  private final Spark lMotor1 = RobotMap.LEFT_MOTOR_1;
-  private final Spark lMotor2 = RobotMap.LEFT_MOTOR_2;
-  private final SpeedControllerGroup rightControllerGroup = new SpeedControllerGroup(rMotor1, rMotor2);
-  private final SpeedControllerGroup leftControllerGroup = new SpeedControllerGroup(lMotor1, lMotor2);
+  private XboxController x_joystick = new XboxController(Constants.XBOX_PORT_ID);
 
+  private Spark leftM1 = new Spark(Constants.LEFT_MOTOR_1_ID);
+  private Spark leftM2 = new Spark(Constants.LEFT_MOTOR_2_ID);
+  private Spark rightM1 = new Spark(Constants.RIGHT_MOTOR_1_ID);
+  private Spark rightM2 = new Spark(Constants.RIGHT_MOTOR_2_ID);
 
-  private final DifferentialDrive m_drive = new DifferentialDrive(leftMotor, rightMotor);
+  SpeedControllerGroup leftControllerGroup = new SpeedControllerGroup(leftM1, leftM2);
+  SpeedControllerGroup rightControllerGroup = new SpeedControllerGroup(rightM1, rightM2);
+  
+  DifferentialDrive drive = new DifferentialDrive(leftControllerGroup, rightControllerGroup);
+
+  public void tankDrive(double l, double r){
+    drive.tankDrive(l, r);
+  }
+  public void tankDrive(double lr){
+    drive.tankDrive(lr, lr);
+  }
+  
+  public void tankdrivewithjoystick(double sensitivity ){
+    tankDrive(x_joystick.getRawAxis(Constants.L_Y_AXIS) * sensitivity, x_joystick.getRawAxis(Constants.R_Y_AXIS) * sensitivity);
+  }
+  public void tankdrivewithjoystick(){
+    tankDrive(x_joystick.getRawAxis(Constants.L_Y_AXIS) , x_joystick.getRawAxis(Constants.R_Y_AXIS));
+  }
+
+  public void arcadeDrive(double l, double r){
+    drive.arcadeDrive(l, r);
+  }
+  public void arcadeDrivewithjoystick(double sensitivity){
+    arcadeDrive(x_joystick.getRawAxis(Constants.L_Y_AXIS)*sensitivity, x_joystick.getRawAxis(Constants.R_X_AXIS)*sensitivity);
+  }
+  public void arcadeDrivewithjoystick(){
+    arcadeDrive(x_joystick.getRawAxis(Constants.L_Y_AXIS), x_joystick.getRawAxis(Constants.R_X_AXIS));
+  }
+
+  public void stopMotors(){
+    drive.stopMotor();
+  }
+
+  public void setLeftSpeed(double s){
+    leftM1.setSpeed(s);
+    leftM2.setSpeed(s); 
+  }
+
+  public void setRightSpeed(double s){
+    rightM1.setSpeed(s);
+    rightM2.setSpeed(s); 
+  }
+  
+
   /**
    * Creates a new DriveTrain.
    */
