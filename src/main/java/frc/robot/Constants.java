@@ -7,7 +7,10 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -31,5 +34,37 @@ public final class Constants {
 	public static final int R_TRIGGER = 3;
 	public static final int R_X_AXIS = 4;
 	public static final int R_Y_AXIS = 5;
+	public static final int A_BUTTON = 1;
+	public static final int B_BUTTON = 2;
+	public static final int X_BUTTON = 3;
+	public static final int Y_BUTTON = 4;
+	public static final int LEFT_TRIGGER_BUTTON = 5;
+	public static final int RIGHT_TRIGGER_BUTTON = 6;
+	public static final int LEFT_SMALL_BUTTON = 7;
+	public static final int RIGHT_SMALL_BUTTON = 8;
+	public static final int LEFT_JOYSTICK_BUTTON = 9;
+	public static final int RIGHT_JOYSTICK_BUTTON = 10;
+
+	// public static Spark leftM1;
+	// public static Spark leftM2;
+	// public static Spark rightM1;
+	// public static Spark rightM2;
+  
+	// public static SpeedControllerGroup leftControllerGroup;
+	// public static SpeedControllerGroup rightControllerGroup;
+	
+	// public static DifferentialDrive drive = new DifferentialDrive(leftControllerGroup, rightControllerGroup);
+
+	// public static void init (){
+	// 	leftM1 = new Spark(Constants.LEFT_MOTOR_1_ID);
+	// 	leftM2 = new Spark(Constants.LEFT_MOTOR_2_ID);
+	// 	rightM1 = new Spark(Constants.RIGHT_MOTOR_1_ID);
+	// 	rightM2 = new Spark(Constants.RIGHT_MOTOR_2_ID);
+
+	// 	leftControllerGroup = new SpeedControllerGroup(leftM1, leftM2);
+	// 	rightControllerGroup = new SpeedControllerGroup(rightM1, rightM2);
+
+	// 	drive = new DifferentialDrive(leftControllerGroup, rightControllerGroup);
+	// }
 
 }

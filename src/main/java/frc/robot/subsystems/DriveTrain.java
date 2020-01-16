@@ -13,8 +13,10 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import limelightvision.LimeLight;
 
 public class DriveTrain extends SubsystemBase {
+  private LimeLight _limelight;
   private XboxController x_joystick = new XboxController(Constants.XBOX_PORT_ID);
 
   private Spark leftM1 = new Spark(Constants.LEFT_MOTOR_1_ID);
@@ -63,6 +65,10 @@ public class DriveTrain extends SubsystemBase {
   public void setRightSpeed(double s){
     rightM1.setSpeed(s);
     rightM2.setSpeed(s); 
+  }
+
+  public LimeLight gLimeLight(){
+    return _limelight;
   }
   
 

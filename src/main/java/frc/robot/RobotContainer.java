@@ -8,8 +8,14 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.Drive_limeLight_Aim;
+import frc.robot.commands.Drive_limeLight_Aim_n_Range;
+import frc.robot.commands.Drive_limeLight_Range;
+import frc.robot.subsystems.DriveTrain;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -19,15 +25,16 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
+  private final DriveTrain m_DriveTrain = new DriveTrain();
 
-
-
+  private final XboxController x_jstick = new XboxController(Constants.XBOX_PORT_ID);
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+    m_DriveTrain.setDefaultCommand(new ArcadeDrive(() -> x_jstick.getRawAxis(Constants.L_Y_AXIS), () -> x_jstick.getRawAxis(Constants.R_X_AXIS), m_DriveTrain));
   }
 
   /**
@@ -37,6 +44,13 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    final JoystickButton a_Button = new JoystickButton(x_jstick, Constants.A_BUTTON);
+    final JoystickButton b_Button = new JoystickButton(x_jstick, Constants.B_BUTTON);
+    final JoystickButton x_Button = new JoystickButton(x_jstick, Constants.X_BUTTON);
+
+    a_Button.whileHeld(new Drive_limeLight_Aim());
+    b_Button.whileHeld(new Drive_limeLight_Range());
+    x_Button.whileHeld(new Drive_limeLight_Aim_n_Range());
   }
 
 
